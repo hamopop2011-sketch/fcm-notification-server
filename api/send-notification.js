@@ -43,8 +43,7 @@ async function sendFCMNotification(fcmToken, title, body, data = {}) {
           priority: 'HIGH',
           notification: {
             channel_id: 'orders_channel',
-            sound: 'default',
-            priority: 'high'
+            sound: 'default'
           }
         }
       }
