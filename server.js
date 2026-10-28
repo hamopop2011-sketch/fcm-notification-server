@@ -50,6 +50,10 @@ async function sendFCMNotification(fcmToken, title, body, data = {}) {
     console.log('✅ تم الحصول على Access Token');
 
     const url = `https://fcm.googleapis.com/v1/projects/${PROJECT_ID}/messages:send`;
+
+    // ✅ نحدد الـ channel حسب نوع الرسالة
+    // المندوب: urgent_orders | العميل: customer_orders
+    const channelId = data.type === 'order_update' ? 'customer_orders' : 'urgent_orders';
     
     const message = {
       message: {
@@ -65,7 +69,7 @@ async function sendFCMNotification(fcmToken, title, body, data = {}) {
         android: {
           priority: 'HIGH',
           notification: {
-            channel_id: 'orders_channel',
+            channel_id: channelId,
             sound: 'default',
             priority: 'high',
             default_sound: true,
